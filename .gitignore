@@ -11,3 +11,4 @@ playground/.vagrant
 playground/package.box
 .idea
 *.key
+__pycache__
