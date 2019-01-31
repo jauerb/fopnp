@@ -9,3 +9,5 @@ playground/base/requirements2.txt
 playground/base/requirements.txt
 playground/.vagrant
 playground/package.box
+.idea
+*.key
