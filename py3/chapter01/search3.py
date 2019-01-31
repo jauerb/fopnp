@@ -5,12 +5,13 @@
 import http.client
 import json
 from urllib.parse import quote_plus
+from api_util import load_key
 
 base = '/maps/api/geocode/json'
 
 def geocode(address):
-    path = '{}?address={}&sensor=false'.format(base, quote_plus(address))
-    connection = http.client.HTTPConnection('maps.google.com')
+    path = '{}?address={}&sensor=false&key={}'.format(base, quote_plus(address),load_key())
+    connection = http.client.HTTPSConnection('maps.google.com')
     connection.request('GET', path)
     rawreply = connection.getresponse().read()
     reply = json.loads(rawreply.decode('utf-8'))

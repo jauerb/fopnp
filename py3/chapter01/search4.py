@@ -4,23 +4,28 @@
 
 import socket
 from urllib.parse import quote_plus
+import ssl
+from api_util import load_key
 
 request_text = """\
-GET /maps/api/geocode/json?address={}&sensor=false HTTP/1.1\r\n\
-Host: maps.google.com:80\r\n\
+GET /maps/api/geocode/json?address={}&sensor=false&key={} HTTP/1.1\r\n\
+Host: maps.google.com:443\r\n\
 User-Agent: search4.py (Foundations of Python Network Programming)\r\n\
 Connection: close\r\n\
 \r\n\
 """
 
 def geocode(address):
-    sock = socket.socket()
-    sock.connect(('maps.google.com', 80))
-    request = request_text.format(quote_plus(address))
-    sock.sendall(request.encode('ascii'))
+    purpose = ssl.Purpose.SERVER_AUTH
+    context = ssl.create_default_context(purpose)
+    raw_sock = socket.socket()
+    raw_sock.connect(('maps.google.com', 443))
+    ssl_sock = context.wrap_socket(raw_sock, server_hostname='maps.google.com')
+    request = request_text.format(quote_plus(address), load_key())
+    ssl_sock.sendall(request.encode('ascii'))
     raw_reply = b''
     while True:
-        more = sock.recv(4096)
+        more = ssl_sock.recv(4096)
         if not more:
             break
         raw_reply += more
