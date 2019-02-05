@@ -26,8 +26,13 @@ launch an introduction of each level that the book will be discussing.
 
 IMPORTANT: this code was modified January 2019 by Joshua Auerbach to work with
 the current google API, which now requires connecting over HTTPS and using
-an API key.  If you do not have an API key, visit
-[http://g.co/dev/maps-no-account](http://g.co/dev/maps-no-account)
+an API key.
+
+In order to use this code, please place your API key in a file inside of this
+directory called **google.key**
+
+If you do not have an API key, visit 
+http://g.co/dev/maps-no-account to obtain one.
 
 ```
 $ python3 search1.py
