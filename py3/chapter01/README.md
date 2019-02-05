@@ -24,6 +24,11 @@ exactly the same Google geocoding query, but at four different levels of
 abstraction in the network protocol hierarchy. This lets the chapter
 launch an introduction of each level that the book will be discussing.
 
+IMPORTANT: this code was modified January 2019 by Joshua Auerbach to work with
+the current google API, which now requires connecting over HTTPS and using
+an API key.  If you do not have an API key, visit
+[http://g.co/dev/maps-no-account](http://g.co/dev/maps-no-account)
+
 ```
 $ python3 search1.py
 (41.521954, -84.306691)
